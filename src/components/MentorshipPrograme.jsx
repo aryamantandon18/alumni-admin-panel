@@ -20,8 +20,18 @@ export default function MentorshipTable({ data, onDelete }) {
                 enableSorting: true,
             },
             {
-                accessorKey: "mentor",  // Mentor Name
+                accessorKey: "mentor.facultyId",  // Mentor Name
                 header: "Mentor",
+                enableSorting: true,
+            },
+            {
+                accessorKey: "description",  // Description
+                header: "Description",
+                enableSorting: false,
+            },
+            {
+                accessorKey: "category",  // Category
+                header: "Category",
                 enableSorting: true,
             },
             {
@@ -30,13 +40,14 @@ export default function MentorshipTable({ data, onDelete }) {
                 enableSorting: true,
             },
             {
-                accessorKey: "startDate",  // Start Date
-                header: "Start Date",
+                accessorKey: "prerequisites",  // Prerequisites
+                header: "Prerequisites",
+                enableSorting: false,
+            },
+            {
+                accessorKey: "schedule",  // Schedule
+                header: "Schedule",
                 enableSorting: true,
-                Cell: ({ cell }) => {
-                    const date = new Date(cell.getValue());
-                    return date.toLocaleDateString() || "Not Available";
-                },
             },
             {
                 accessorKey: "status",  // Program Status

@@ -10,6 +10,7 @@ import JobPostings from './pages/JobPostings';
 import Gallery from './pages/Gallery';
 import InterviewExp from './pages/InterviewExp';
 import EditMentorship from './components/EditMentorship';
+import JobDetailsPage from './components/JobDetailPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/mentorship" element={<Mentorship/>}/>
           <Route path="/editMentorship/:id" element={<EditMentorship/>}/>
           <Route path="/jobs" element={<JobPostings/>}/>
+          <Route path="/job-details/:id" element={<JobDetailsPage/>}/>
           <Route path="/gallery" element={<Gallery/>}/>
           <Route path="/interview-experience" element={<InterviewExp/>}/>
         </Routes>

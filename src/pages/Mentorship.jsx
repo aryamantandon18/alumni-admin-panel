@@ -5,20 +5,34 @@ import { drawerWidth } from "../components/Layout/Header";
 
 const initialData = [
     {
-        id: 1,
+        id: "1",
         title: "Leadership Training",
-        mentor: "John Doe",
+        mentorId: "101",
+        mentor: { facultyId: "101", name: "John Doe" },
+        description: "A comprehensive leadership training program.",
+        category: "Leadership",
         duration: "3 Months",
-        startDate: "2024-09-10",
-        status: true,
+        prerequisites: "Basic leadership skills",
+        schedule: "Every Saturday 10 AM - 12 PM",
+        status: "ACTIVE",
+        applications: [],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
     },
     {
-        id: 2,
+        id: "2",
         title: "Software Development Bootcamp",
-        mentor: "Jane Smith",
+        mentorId: "102",
+        mentor: { facultyId: "102", name: "Jane Smith" },
+        description: "An intensive bootcamp for aspiring developers.",
+        category: "Technology",
         duration: "6 Months",
-        startDate: "2024-10-15",
-        status: false,
+        prerequisites: "Basic programming knowledge",
+        schedule: "Weekdays 6 PM - 8 PM",
+        status: "INACTIVE",
+        applications: [],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
     },
 ];
 
@@ -31,31 +45,29 @@ const Mentorship = () => {
 
     return (
         <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          paddingTop:0,
-          ml: { sm: `${drawerWidth}px` }, // Ensures content shifts right in desktop mode
-          width: { sm: `calc(100% - ${drawerWidth}px)` }, // Prevents content from being behind the drawer
-          transition: "margin 0.3s ease-in-out",
-        }}
-      >
-        
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 2,
-            transition: "margin 0.3s ease-in-out",
-          }}
+            component="main"
+            sx={{
+                flexGrow: 1,
+                p: 3,
+                paddingTop: 0,
+                ml: { sm: `${drawerWidth}px` },
+                width: { sm: `calc(100% - ${drawerWidth}px)` },
+                transition: "margin 0.3s ease-in-out",
+            }}
         >
-          Mentorship Programs
-        </Typography>
-      
-        {/* Your MentorshipTable */}
-        <MentorshipTable data={mentorships} onDelete={handleDelete} />
-      </Box>
-      
+            <Typography
+                variant="h4"
+                sx={{
+                    mb: 2,
+                    transition: "margin 0.3s ease-in-out",
+                }}
+            >
+                Mentorship Programs
+            </Typography>
+
+            {/* Updated MentorshipTable */}
+            <MentorshipTable data={mentorships} onDelete={handleDelete} />
+        </Box>
     );
 };
 
