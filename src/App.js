@@ -9,8 +9,10 @@ import Mentorship from './pages/Mentorship';
 import JobPostings from './pages/JobPostings';
 import Gallery from './pages/Gallery';
 import InterviewExp from './pages/InterviewExp';
+import EditEventForm from './components/EditEventForm'
 import EditMentorship from './components/EditMentorship';
 import JobDetailsPage from './components/JobDetailPage';
+import EditNewsForm from './components/EditNewsForm';
 
 function App() {
   return (
@@ -20,9 +22,13 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path="/events" element={<Events/>}/>
+          <Route path="/editEvent/:id" element={<EditEventForm />} />
+
           <Route path="/news" element={<News/>}/>
           <Route path="/mentorship" element={<Mentorship/>}/>
           <Route path="/editMentorship/:id" element={<EditMentorship/>}/>
+          <Route path="/editNews/:id" element={<EditNewsForm/>}/>
+
           <Route path="/jobs" element={<JobPostings/>}/>
           <Route path="/job-details/:id" element={<JobDetailsPage/>}/>
           <Route path="/gallery" element={<Gallery/>}/>
