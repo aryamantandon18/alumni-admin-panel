@@ -13,22 +13,6 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const data = [
-  {
-    eventId: 1,
-    eventName: "Tech Conference 2024",
-    eventDescription: "A global tech conference with top industry leaders.",
-    eventDate: "2024-10-15",
-    eventType: "Technology",
-    eventLocation: "New York",
-    eventImage: "https://via.placeholder.com/50",
-    eventMode: "Offline",
-    category: "Tech",
-    subcategory: "AI & ML",
-    linkToRegister: "https://example.com/register",
-    status: true,
-  },
-];
 
 const validationSchema = Yup.object({
   eventName: Yup.string().required("Event Name is required"),
@@ -48,7 +32,7 @@ const validationSchema = Yup.object({
   status: Yup.boolean(),
 });
 
-export default function EditEventForm() {
+export default function EditEventForm({events}) {
   const { id } = useParams();
   const navigate = useNavigate();
   const numericId = parseInt(id);
@@ -57,7 +41,7 @@ export default function EditEventForm() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
   useEffect(() => {
-    const foundEvent = data.find((e) => e.eventId === numericId);
+    const foundEvent = events.find((e) => e.eventId === numericId);
     setEvent(foundEvent || null);
   }, [numericId]);
 
@@ -119,6 +103,7 @@ export default function EditEventForm() {
           value={formik.values.eventDate}
           onChange={formik.handleChange}
           sx={{ mb: 2 }}
+        
         />
         <TextField
           fullWidth

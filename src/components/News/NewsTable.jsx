@@ -15,6 +15,10 @@ export default function NewsTable({ data, onDelete }) {
     navigate(`/editNews/${row?.newsId}`);
   };
 
+  const handleRowClick = (row) => {
+    navigate(`/viewNews/${row.original.newsId}`);
+  };
+
   const columns = useMemo(
     () => [
       {
@@ -79,13 +83,19 @@ export default function NewsTable({ data, onDelete }) {
           <div style={{ display: "flex", gap: "0.5rem" }}>
             <IconButton
               color="primary"
-              onClick={() => handleUpdate(row.original)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleUpdate(row.original);
+              }}
             >
               <EditIcon />
             </IconButton>
             <IconButton
               color="error"
-              onClick={() => onDelete(row.original.newsId)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(row.original.newsId);
+              }}
             >
               <DeleteIcon />
             </IconButton>
@@ -96,9 +106,21 @@ export default function NewsTable({ data, onDelete }) {
     []
   );
 
-  return (
-    <Paper sx={{ padding: 2 }}>
-      <MaterialReactTable columns={columns} data={data} />
-    </Paper>
-  );
-}
+ const table = useMaterialReactTable({
+     data,
+     columns,
+     enableSorting: true,
+     enablePagination: true,
+     initialState: { pagination: { pageIndex: 0, pageSize: 5 } },
+     muiTableBodyRowProps: ({ row }) => ({
+       onClick: () => handleRowClick(row),
+       style: { cursor: "pointer" },
+     }),
+   });
+ 
+   return (
+     <Paper sx={{ padding: 2 }}>
+       <MaterialReactTable table={table} />
+     </Paper>
+   );
+ };

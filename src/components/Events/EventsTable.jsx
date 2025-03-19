@@ -15,6 +15,10 @@ const EventsTable = ({ data, onDelete }) => {
     navigate(`/editEvent/${row?.eventId}`);
   };
 
+  const handleRowClick = (row) => {
+    navigate(`/viewEvent/${row.original.eventId}`);
+  };
+
   const columns = useMemo(
     () => [
       { accessorKey: "eventName", header: "Event Name", enableSorting: true },
@@ -66,13 +70,19 @@ const EventsTable = ({ data, onDelete }) => {
           <div style={{ display: "flex", gap: "0.5rem" }}>
             <IconButton
               color="primary"
-              onClick={() => handleUpdate(row.original)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleUpdate(row.original);
+              }}
             >
               <EditIcon />
             </IconButton>
             <IconButton
               color="error"
-              onClick={() => onDelete(row.original.eventId)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(row.original.eventId);
+              }}
             >
               <DeleteIcon />
             </IconButton>
@@ -89,6 +99,10 @@ const EventsTable = ({ data, onDelete }) => {
     enableSorting: true,
     enablePagination: true,
     initialState: { pagination: { pageIndex: 0, pageSize: 5 } },
+    muiTableBodyRowProps: ({ row }) => ({
+      onClick: () => handleRowClick(row),
+      style: { cursor: "pointer" },
+    }),
   });
 
   return (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import NewsTable from "../components/NewsTable";
-import { Box, Typography } from "@mui/material";
+import NewsTable from "../components/News/NewsTable";
+import { Box, Typography, Button } from "@mui/material";
 import { drawerWidth } from "../components/Layout/Header";
-
+import { useNavigate } from "react-router-dom";
 // Initial News Data
 const initialNews = [
   {
@@ -12,10 +12,10 @@ const initialNews = [
     newsImage: "https://via.placeholder.com/50",
     category: "Technology",
     author: "John Doe",
-    newsDate: "2024-08-10T00:00:00Z",
+    newsDate: "2024-08-10",
     isActive: true,
-    createdAt: "2024-08-01T10:00:00Z",
-    updatedAt: "2024-08-05T15:00:00Z",
+    createdAt: "2024-08-01",
+    updatedAt: "2024-08-05",
   },
   {
     newsId: 2,
@@ -24,14 +24,15 @@ const initialNews = [
     newsImage: "https://via.placeholder.com/50",
     category: "Finance",
     author: "Jane Smith",
-    newsDate: "2024-08-12T00:00:00Z",
+    newsDate: "2024-08-12",
     isActive: false,
-    createdAt: "2024-08-02T11:00:00Z",
-    updatedAt: "2024-08-06T16:00:00Z",
+    createdAt: "2024-08-02",
+    updatedAt: "2024-08-06",
   },
 ];
 
 const News = () => {
+  const navigate = useNavigate();
   const [news, setNews] = useState(initialNews);
 
   const handleDelete = (newsId) => {
@@ -53,6 +54,14 @@ const News = () => {
       <Typography variant="h4" sx={{ mb: 2 }}>
         News Articles
       </Typography>
+       <Button
+              variant="contained"
+              color="primary"
+              sx={{ mb: 2 }}
+              onClick={() => navigate("/addNews")}
+            >
+              Add News
+            </Button>
       <NewsTable data={news} onDelete={handleDelete} />
     </Box>
   );

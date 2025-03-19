@@ -13,20 +13,7 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const demoNews = [
-  {
-    newsId: 1,
-    newsTitle: "Tech Innovations 2024",
-    newsDescription: "Latest trends in tech.",
-    newsImage: "https://via.placeholder.com/50",
-    newsDate: "2024-08-10",
-    isActive: true,
-    author: "John Doe",
-    category: "Technology",
-    createdAt: "2024-08-01",
-    updatedAt: "2024-08-05",
-  },
-];
+
 
 const validationSchema = Yup.object({
   newsTitle: Yup.string().required("Title is required"),
@@ -40,7 +27,7 @@ const validationSchema = Yup.object({
   category: Yup.string().required("Category is required"),
 });
 
-export default function EditNewsForm() {
+export default function EditNewsForm({news}) {
   const { id } = useParams();
   const navigate = useNavigate();
   const numericId = parseInt(id);
@@ -48,7 +35,7 @@ export default function EditNewsForm() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
   useEffect(() => {
-    const foundNews = demoNews.find((n) => n.newsId === numericId);
+    const foundNews = news.find((n) => n.newsId === numericId);
     setNewsItem(foundNews || null);
   }, [numericId]);
 

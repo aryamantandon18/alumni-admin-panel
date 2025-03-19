@@ -1,7 +1,9 @@
 import React from "react";
-import EventsTable from "../components/EventsTable";
+import EventsTable from "../components/Events/EventsTable";
 import { drawerWidth } from "../components/Layout/Header";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography , Button} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 
 // Sample data for events
 const eventData = [
@@ -36,6 +38,7 @@ const eventData = [
 ];
 
 const Events = () => {
+  const navigate = useNavigate();
   return (
     <Box
       component="main"
@@ -51,6 +54,14 @@ const Events = () => {
       <Typography variant="h4" sx={{ mb: 2 }}>
         Events
       </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ mb: 2 }}
+        onClick={() => navigate("/addEvent")}
+      >
+        Add New Event
+      </Button>
       <EventsTable data={eventData} />
     </Box>
   );
